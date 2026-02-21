@@ -5,8 +5,8 @@ ROOT_DIR="$(cd "$(dirname "$0")/.." && pwd)"
 cd "$ROOT_DIR"
 
 if [ ! -d .git ]; then
-  echo "Kein Git-Repository gefunden in: $ROOT_DIR" >&2
-  exit 1
+  echo "Kein Git-Repository in $ROOT_DIR, fallback auf Dummy-Updater..."
+  exec "$ROOT_DIR/scripts/dummy_update.sh"
 fi
 
 BRANCH="${1:-$(git rev-parse --abbrev-ref HEAD)}"

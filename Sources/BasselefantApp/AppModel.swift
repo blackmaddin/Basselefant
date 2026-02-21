@@ -179,6 +179,8 @@ final class AppModel: ObservableObject {
     @Published var audioMapProfile: VisualAudioMapProfile = .balanced
     @Published var dynamicsTuning: VisualDynamicsTuning = .neutral
     @Published var autoGainEnabled: Bool = true
+    @Published var autoUpdateEnabled: Bool = false
+    @Published var updateInProgress: Bool = false
     @Published var audioInputs: [MicrophoneAudioService.InputDevice] = []
     @Published var selectedAudioInputID: String?
     @Published var displayTargets: [DisplayTarget] = []
@@ -188,6 +190,9 @@ final class AppModel: ObservableObject {
     private let directService = DirectNowPlayingService()
     private let externalDisplay = ExternalDisplayCoordinator()
     private let gainStoreKey = "basselefant.autoGainProfiles.v1"
+    private let updaterRepoURL = "https://github.com/blackmaddin/Basselefant.git"
+    private let updaterBranch = "main"
+    private let updaterLaunchAgentLabel = "com.basselefant.autoupdate"
     private var lastDirectTrackDate: Date?
     private var observers: [NSObjectProtocol] = []
     private var previousFeature: AudioFeature = .zero
@@ -240,6 +245,7 @@ final class AppModel: ObservableObject {
     private func boot() {
         refreshAudioInputs()
         refreshDisplays()
+        refreshAutoUpdateState()
         directService.start()
         if sourceMode == .directOnly {
             statusText = "Direktmodus aktiv (Spotify/Music, Mikrofon aus)"
@@ -318,6 +324,54 @@ final class AppModel: ObservableObject {
         gainProfiles = [:]
         persistGainProfiles()
         statusText = "Auto gain profiles reset"
+    }
+
+    func runUpdateNowForDummies() {
+        guard !updateInProgress else { return }
+        updateInProgress = true
+        statusText = "Update laeuft..."
+
+        Task {
+            do {
+                let scriptURL = try ensureUpdaterScript()
+                _ = try await Self.runProcess(executable: "/bin/zsh", arguments: [scriptURL.path])
+                updateInProgress = false
+                statusText = "Update installiert, starte neu..."
+                relaunchInstalledApp()
+            } catch {
+                updateInProgress = false
+                statusText = "Update fehlgeschlagen: \(error.localizedDescription)"
+            }
+        }
+    }
+
+    func setAutoUpdateEnabledForDummies(_ enabled: Bool) {
+        guard autoUpdateEnabled != enabled else { return }
+        if enabled {
+            statusText = "Auto-Update wird aktiviert..."
+        } else {
+            statusText = "Auto-Update wird deaktiviert..."
+        }
+
+        Task {
+            do {
+                if enabled {
+                    let plistURL = try ensureAutoUpdateAgent()
+                    _ = try? await Self.runProcess(executable: "/bin/launchctl", arguments: ["unload", "-w", plistURL.path])
+                    _ = try await Self.runProcess(executable: "/bin/launchctl", arguments: ["load", "-w", plistURL.path])
+                    autoUpdateEnabled = true
+                    statusText = "Auto-Update aktiv (alle 6h)"
+                } else {
+                    let plistURL = updaterLaunchAgentURL()
+                    _ = try? await Self.runProcess(executable: "/bin/launchctl", arguments: ["unload", "-w", plistURL.path])
+                    autoUpdateEnabled = false
+                    statusText = "Auto-Update deaktiviert"
+                }
+            } catch {
+                autoUpdateEnabled = false
+                statusText = "Auto-Update Fehler: \(error.localizedDescription)"
+            }
+        }
     }
 
     func refreshAudioInputs() {
@@ -475,6 +529,117 @@ final class AppModel: ObservableObject {
         }
     }
 
+    private func refreshAutoUpdateState() {
+        autoUpdateEnabled = FileManager.default.fileExists(atPath: updaterLaunchAgentURL().path)
+    }
+
+    private func relaunchInstalledApp() {
+        let appURL = URL(fileURLWithPath: "/Applications/Basselefant.app")
+        let config = NSWorkspace.OpenConfiguration()
+        config.activates = true
+        NSWorkspace.shared.openApplication(at: appURL, configuration: config) { _, error in
+            if error == nil {
+                NSApplication.shared.terminate(nil)
+            } else {
+                Task { @MainActor in
+                    self.statusText = "Update installiert. Bitte manuell neu starten."
+                }
+            }
+        }
+    }
+
+    private func ensureAutoUpdateAgent() throws -> URL {
+        let scriptURL = try ensureUpdaterScript()
+        let plistURL = updaterLaunchAgentURL()
+        let logsURL = updaterLogsURL()
+
+        try FileManager.default.createDirectory(
+            at: logsURL.deletingLastPathComponent(),
+            withIntermediateDirectories: true
+        )
+        try FileManager.default.createDirectory(
+            at: plistURL.deletingLastPathComponent(),
+            withIntermediateDirectories: true
+        )
+
+        let plist = """
+        <?xml version="1.0" encoding="UTF-8"?>
+        <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+        <plist version="1.0">
+        <dict>
+          <key>Label</key>
+          <string>\(xmlEscape(updaterLaunchAgentLabel))</string>
+          <key>ProgramArguments</key>
+          <array>
+            <string>/bin/zsh</string>
+            <string>\(xmlEscape(scriptURL.path))</string>
+          </array>
+          <key>RunAtLoad</key>
+          <true/>
+          <key>StartInterval</key>
+          <integer>21600</integer>
+          <key>StandardOutPath</key>
+          <string>\(xmlEscape(logsURL.path))</string>
+          <key>StandardErrorPath</key>
+          <string>\(xmlEscape(logsURL.path))</string>
+        </dict>
+        </plist>
+        """
+        try plist.write(to: plistURL, atomically: true, encoding: .utf8)
+        return plistURL
+    }
+
+    private func ensureUpdaterScript() throws -> URL {
+        let scriptURL = updaterScriptURL()
+        try FileManager.default.createDirectory(
+            at: scriptURL.deletingLastPathComponent(),
+            withIntermediateDirectories: true
+        )
+
+        let script = """
+        #!/bin/zsh
+        set -euo pipefail
+
+        REPO_DIR="$HOME/.basselefant/repo"
+        if [ ! -d "$REPO_DIR/.git" ]; then
+          mkdir -p "$(dirname "$REPO_DIR")"
+          git clone "\(updaterRepoURL)" "$REPO_DIR"
+        fi
+
+        cd "$REPO_DIR"
+        git fetch origin "\(updaterBranch)"
+        git pull --ff-only origin "\(updaterBranch)"
+        "$REPO_DIR/scripts/build_app.sh"
+        """
+        try script.write(to: scriptURL, atomically: true, encoding: .utf8)
+        try FileManager.default.setAttributes([.posixPermissions: NSNumber(value: Int16(0o755))], ofItemAtPath: scriptURL.path)
+        return scriptURL
+    }
+
+    private func updaterScriptURL() -> URL {
+        let base = NSString(string: "~/Library/Application Support/Basselefant").expandingTildeInPath
+        return URL(fileURLWithPath: base).appendingPathComponent("update.sh")
+    }
+
+    private func updaterLaunchAgentURL() -> URL {
+        let path = NSString(string: "~/Library/LaunchAgents/\(updaterLaunchAgentLabel).plist").expandingTildeInPath
+        return URL(fileURLWithPath: path)
+    }
+
+    private func updaterLogsURL() -> URL {
+        let path = NSString(string: "~/Library/Logs/BasselefantUpdater.log").expandingTildeInPath
+        return URL(fileURLWithPath: path)
+    }
+
+    private func xmlEscape(_ text: String) -> String {
+        text
+            .replacingOccurrences(of: "&", with: "&amp;")
+            .replacingOccurrences(of: "<", with: "&lt;")
+            .replacingOccurrences(of: ">", with: "&gt;")
+            .replacingOccurrences(of: "\"", with: "&quot;")
+            .replacingOccurrences(of: "'", with: "&apos;")
+    }
+
     private func waitingDirectTrack() -> TrackInfo {
         TrackInfo(
             title: "Warte auf Spotify/Music",
@@ -582,6 +747,46 @@ final class AppModel: ObservableObject {
 
     private func persistGainProfiles() {
         UserDefaults.standard.set(gainProfiles, forKey: gainStoreKey)
+    }
+
+    private nonisolated static func runProcess(executable: String, arguments: [String]) async throws -> String {
+        try await withCheckedThrowingContinuation { continuation in
+            let process = Process()
+            let pipe = Pipe()
+            process.executableURL = URL(fileURLWithPath: executable)
+            process.arguments = arguments
+            process.standardOutput = pipe
+            process.standardError = pipe
+            process.terminationHandler = { proc in
+                let data = pipe.fileHandleForReading.readDataToEndOfFile()
+                let output = String(data: data, encoding: .utf8) ?? ""
+                if proc.terminationStatus == 0 {
+                    continuation.resume(returning: output)
+                } else {
+                    continuation.resume(throwing: UpdaterProcessError.failed(status: proc.terminationStatus, output: output))
+                }
+            }
+            do {
+                try process.run()
+            } catch {
+                continuation.resume(throwing: error)
+            }
+        }
+    }
+}
+
+private enum UpdaterProcessError: LocalizedError {
+    case failed(status: Int32, output: String)
+
+    var errorDescription: String? {
+        switch self {
+        case let .failed(status, output):
+            let clean = output.trimmingCharacters(in: .whitespacesAndNewlines)
+            if clean.isEmpty {
+                return "Process fehlgeschlagen (Exit \(status))."
+            }
+            return "Process fehlgeschlagen (Exit \(status)): \(clean)"
+        }
     }
 }
 

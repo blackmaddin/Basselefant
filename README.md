@@ -61,6 +61,20 @@ Optional mit Branch:
 ./scripts/update_from_git.sh main
 ```
 
+## Update fuer Dummies (vollautomatisch)
+
+In der App unter `Settings`:
+- `Auto Update (alle 6h)` aktivieren
+- oder `Jetzt updaten und neu starten` klicken
+
+Ohne App-Menue (Terminal, ein Befehl):
+
+```bash
+./scripts/dummy_update.sh
+```
+
+Das Skript klont bei Bedarf automatisch nach `~/.basselefant/repo`, zieht Updates von GitHub und installiert neu nach `/Applications/Basselefant.app`.
+
 ## Berechtigungen
 
 - Beim ersten Start Mikrofon-Zugriff erlauben.

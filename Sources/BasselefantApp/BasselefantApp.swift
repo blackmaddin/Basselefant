@@ -51,6 +51,14 @@ struct BasselefantApp: App {
                 Button("Reset Dynamics Fine Tuning") {
                     model.resetDynamicsTuning()
                 }
+                Divider()
+                Button(model.updateInProgress ? "Update laeuft..." : "Update jetzt installieren") {
+                    model.runUpdateNowForDummies()
+                }
+                .disabled(model.updateInProgress)
+                Button(model.autoUpdateEnabled ? "Auto Update: On" : "Auto Update: Off") {
+                    model.setAutoUpdateEnabledForDummies(!model.autoUpdateEnabled)
+                }
             }
             CommandMenu("Audio") {
                 ForEach(RecognitionSourceMode.allCases) { mode in
@@ -191,6 +199,14 @@ private struct MenuBarControls: View {
             }
             Button("Reset Auto Gain Profiles") { model.resetAutoGainProfiles() }
             Button("Reset Fine Tuning") { model.resetDynamicsTuning() }
+            Divider()
+            Button(model.updateInProgress ? "Update laeuft..." : "Update jetzt installieren") {
+                model.runUpdateNowForDummies()
+            }
+            .disabled(model.updateInProgress)
+            Button(model.autoUpdateEnabled ? "Auto Update: On" : "Auto Update: Off") {
+                model.setAutoUpdateEnabledForDummies(!model.autoUpdateEnabled)
+            }
         }
 
         Section("Audio Source") {
@@ -301,6 +317,17 @@ private struct AppSettingsView: View {
                 Button("Reset Auto Gain Profiles") {
                     model.resetAutoGainProfiles()
                 }
+            }
+
+            Section("Updates (Dummy Mode)") {
+                Toggle("Auto Update (alle 6h)", isOn: Binding(
+                    get: { model.autoUpdateEnabled },
+                    set: { model.setAutoUpdateEnabledForDummies($0) }
+                ))
+                Button(model.updateInProgress ? "Update laeuft..." : "Jetzt updaten und neu starten") {
+                    model.runUpdateNowForDummies()
+                }
+                .disabled(model.updateInProgress)
             }
 
             Section("Fine Tuning (0-100, 50 = neutral)") {
