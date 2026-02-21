@@ -1,0 +1,368 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 77;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		07CC27407B4F1DDC5B26E2FE /* IOSAppModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ABE2174FB91486F25A41718 /* IOSAppModel.swift */; };
+		1F6BE537BC5C4CEF0F979D5D /* VisualStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2186E4A5FC99127DCC42970 /* VisualStyle.swift */; };
+		978FC9C667C1518B1A060768 /* AudioFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6BF0C0328E64EEFC9BC5FC4 /* AudioFeature.swift */; };
+		9D159316F4A70EA5AF59931E /* AudioAnalyzer.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9EDED7056FC5BCBAA262337 /* AudioAnalyzer.swift */; };
+		AB547A6B700E52EE6F561B66 /* IOSContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C36130A94C31C22E8F91A38D /* IOSContentView.swift */; };
+		CD885F1CFE48DE5EB0DCA190 /* SharedVisualTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5932BA31DA0C6D759829BB1B /* SharedVisualTypes.swift */; };
+		D7D638C6237A18BF235003AD /* IOSMicrophoneAudioService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A196DF0387ABF47EED56363 /* IOSMicrophoneAudioService.swift */; };
+		D938375EB84A7BF78634BE1A /* BasselefantiOSApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 295D8BA3F970C4F652D91815 /* BasselefantiOSApp.swift */; };
+		FAF9084F67BA8CF70733E602 /* BasselefantVisualizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A2727FA9FBE4EC6C465B541 /* BasselefantVisualizer.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		295D8BA3F970C4F652D91815 /* BasselefantiOSApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasselefantiOSApp.swift; sourceTree = "<group>"; };
+		5932BA31DA0C6D759829BB1B /* SharedVisualTypes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedVisualTypes.swift; sourceTree = "<group>"; };
+		5A196DF0387ABF47EED56363 /* IOSMicrophoneAudioService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IOSMicrophoneAudioService.swift; sourceTree = "<group>"; };
+		5ABE2174FB91486F25A41718 /* IOSAppModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IOSAppModel.swift; sourceTree = "<group>"; };
+		779DA79927B828EBC5F45BB7 /* BasselefantiOS.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = BasselefantiOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		9A2727FA9FBE4EC6C465B541 /* BasselefantVisualizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasselefantVisualizer.swift; sourceTree = "<group>"; };
+		C36130A94C31C22E8F91A38D /* IOSContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IOSContentView.swift; sourceTree = "<group>"; };
+		C9EDED7056FC5BCBAA262337 /* AudioAnalyzer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioAnalyzer.swift; sourceTree = "<group>"; };
+		D2186E4A5FC99127DCC42970 /* VisualStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VisualStyle.swift; sourceTree = "<group>"; };
+		D6BF0C0328E64EEFC9BC5FC4 /* AudioFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioFeature.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXGroup section */
+		0BED526ADCA4BA640FA4561B /* Visuals */ = {
+			isa = PBXGroup;
+			children = (
+				9A2727FA9FBE4EC6C465B541 /* BasselefantVisualizer.swift */,
+				D2186E4A5FC99127DCC42970 /* VisualStyle.swift */,
+			);
+			path = Visuals;
+			sourceTree = "<group>";
+		};
+		257ADFA941CFCEFBBCBAB543 /* Audio */ = {
+			isa = PBXGroup;
+			children = (
+				C9EDED7056FC5BCBAA262337 /* AudioAnalyzer.swift */,
+				D6BF0C0328E64EEFC9BC5FC4 /* AudioFeature.swift */,
+			);
+			path = Audio;
+			sourceTree = "<group>";
+		};
+		2AB7535DD8CD76A8FF6E2C23 /* Sources */ = {
+			isa = PBXGroup;
+			children = (
+				295D8BA3F970C4F652D91815 /* BasselefantiOSApp.swift */,
+				5ABE2174FB91486F25A41718 /* IOSAppModel.swift */,
+				C36130A94C31C22E8F91A38D /* IOSContentView.swift */,
+				5A196DF0387ABF47EED56363 /* IOSMicrophoneAudioService.swift */,
+				5932BA31DA0C6D759829BB1B /* SharedVisualTypes.swift */,
+			);
+			path = Sources;
+			sourceTree = "<group>";
+		};
+		4059B6CA07E895E28F04A6A3 /* Sources */ = {
+			isa = PBXGroup;
+			children = (
+				970BE0AE26E5825ADF40ABD5 /* BasselefantApp */,
+			);
+			path = Sources;
+			sourceTree = "<group>";
+		};
+		61BC3D952A2EAA3D600638F4 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				779DA79927B828EBC5F45BB7 /* BasselefantiOS.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		970BE0AE26E5825ADF40ABD5 /* BasselefantApp */ = {
+			isa = PBXGroup;
+			children = (
+				257ADFA941CFCEFBBCBAB543 /* Audio */,
+				0BED526ADCA4BA640FA4561B /* Visuals */,
+			);
+			path = BasselefantApp;
+			sourceTree = "<group>";
+		};
+		B002D93F11F1BFC15DB8F4BA /* basselefant */ = {
+			isa = PBXGroup;
+			children = (
+				4059B6CA07E895E28F04A6A3 /* Sources */,
+			);
+			name = basselefant;
+			path = ..;
+			sourceTree = "<group>";
+		};
+		EF67DA769BC92267106AFD0B = {
+			isa = PBXGroup;
+			children = (
+				B002D93F11F1BFC15DB8F4BA /* basselefant */,
+				2AB7535DD8CD76A8FF6E2C23 /* Sources */,
+				61BC3D952A2EAA3D600638F4 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		A18A040F83924E5886034372 /* BasselefantiOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = EBAAE1C835D8137B60DC188D /* Build configuration list for PBXNativeTarget "BasselefantiOS" */;
+			buildPhases = (
+				969A8B4C811FB21FE582005E /* Sources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = BasselefantiOS;
+			packageProductDependencies = (
+			);
+			productName = BasselefantiOS;
+			productReference = 779DA79927B828EBC5F45BB7 /* BasselefantiOS.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		E77D0DEFABEAAF9148DC8ABC /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = YES;
+				LastUpgradeCheck = 1430;
+				TargetAttributes = {
+					A18A040F83924E5886034372 = {
+						ProvisioningStyle = Automatic;
+					};
+				};
+			};
+			buildConfigurationList = 890C8A9821A293D994C4EB7D /* Build configuration list for PBXProject "BasselefantiOS" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				Base,
+				en,
+			);
+			mainGroup = EF67DA769BC92267106AFD0B;
+			minimizedProjectReferenceProxies = 1;
+			preferredProjectObjectVersion = 77;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				A18A040F83924E5886034372 /* BasselefantiOS */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		969A8B4C811FB21FE582005E /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9D159316F4A70EA5AF59931E /* AudioAnalyzer.swift in Sources */,
+				978FC9C667C1518B1A060768 /* AudioFeature.swift in Sources */,
+				FAF9084F67BA8CF70733E602 /* BasselefantVisualizer.swift in Sources */,
+				D938375EB84A7BF78634BE1A /* BasselefantiOSApp.swift in Sources */,
+				07CC27407B4F1DDC5B26E2FE /* IOSAppModel.swift in Sources */,
+				AB547A6B700E52EE6F561B66 /* IOSContentView.swift in Sources */,
+				D7D638C6237A18BF235003AD /* IOSMicrophoneAudioService.swift in Sources */,
+				CD885F1CFE48DE5EB0DCA190 /* SharedVisualTypes.swift in Sources */,
+				1F6BE537BC5C4CEF0F979D5D /* VisualStyle.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		20B1C27C46FDC96365A500A7 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "";
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.blackmaddin.basselefant.ios;
+				SDKROOT = iphoneos;
+				SUPPORTS_MACCATALYST = NO;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Release;
+		};
+		3E23120E22B62D7CD72D9594 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+		404E389EE5A2432888516C27 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "";
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.blackmaddin.basselefant.ios;
+				SDKROOT = iphoneos;
+				SUPPORTS_MACCATALYST = NO;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Debug;
+		};
+		987A2DF7CE0582AA1D1076BD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"DEBUG=1",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		890C8A9821A293D994C4EB7D /* Build configuration list for PBXProject "BasselefantiOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				987A2DF7CE0582AA1D1076BD /* Debug */,
+				3E23120E22B62D7CD72D9594 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		EBAAE1C835D8137B60DC188D /* Build configuration list for PBXNativeTarget "BasselefantiOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				404E389EE5A2432888516C27 /* Debug */,
+				20B1C27C46FDC96365A500A7 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = E77D0DEFABEAAF9148DC8ABC /* Project object */;
+}

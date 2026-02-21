@@ -24,6 +24,33 @@ swift build
 swift run BasselefantApp
 ```
 
+## iOS Variante (iPhone, Hochkant + Quer)
+
+Die iOS-App liegt in `iOSApp/BasselefantiOS.xcodeproj`.
+
+Wichtig:
+- iOS nutzt Mikrofon-Reaktivitaet.
+- Direkter Spotify/Music-Track-Abruf wie auf macOS ist auf iOS systembedingt nicht verfuegbar.
+- Orientierungen sind aktiviert: Portrait + Landscape.
+
+Projekt neu generieren (falls noetig):
+
+```bash
+./scripts/generate_ios_project.sh
+```
+
+Device-Build (unsigned, fuer technischen Check):
+
+```bash
+./scripts/build_ios_device.sh
+```
+
+Auf iPhone installieren (Xcode):
+1. `iOSApp/BasselefantiOS.xcodeproj` in Xcode oeffnen.
+2. Target `BasselefantiOS` -> `Signing & Capabilities` -> dein `Team` waehlen.
+3. iPhone anschliessen und als Run Destination waehlen.
+4. `Run` druecken.
+
 ## App in /Applications installieren
 
 ```bash
