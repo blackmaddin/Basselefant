@@ -6,8 +6,13 @@ struct BasselefantiOSApp: App {
 
     var body: some Scene {
         WindowGroup {
-            IOSContentView()
-                .environmentObject(model)
+            IOSFullscreenHost {
+                IOSContentView()
+                    .environmentObject(model)
+                    .ignoresSafeArea(.all, edges: .all)
+                    .persistentSystemOverlays(.hidden)
+            }
+            .ignoresSafeArea(.all, edges: .all)
         }
     }
 }

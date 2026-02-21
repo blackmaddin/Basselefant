@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		07CC27407B4F1DDC5B26E2FE /* IOSAppModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ABE2174FB91486F25A41718 /* IOSAppModel.swift */; };
 		1F6BE537BC5C4CEF0F979D5D /* VisualStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2186E4A5FC99127DCC42970 /* VisualStyle.swift */; };
+		4AF6BB1E4DD52EBFB8056B2B /* IOSFullscreenHost.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43412D3497458F8D22B275D3 /* IOSFullscreenHost.swift */; };
 		978FC9C667C1518B1A060768 /* AudioFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6BF0C0328E64EEFC9BC5FC4 /* AudioFeature.swift */; };
 		9D159316F4A70EA5AF59931E /* AudioAnalyzer.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9EDED7056FC5BCBAA262337 /* AudioAnalyzer.swift */; };
 		AB547A6B700E52EE6F561B66 /* IOSContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C36130A94C31C22E8F91A38D /* IOSContentView.swift */; };
@@ -20,6 +21,7 @@
 
 /* Begin PBXFileReference section */
 		295D8BA3F970C4F652D91815 /* BasselefantiOSApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasselefantiOSApp.swift; sourceTree = "<group>"; };
+		43412D3497458F8D22B275D3 /* IOSFullscreenHost.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IOSFullscreenHost.swift; sourceTree = "<group>"; };
 		5932BA31DA0C6D759829BB1B /* SharedVisualTypes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedVisualTypes.swift; sourceTree = "<group>"; };
 		5A196DF0387ABF47EED56363 /* IOSMicrophoneAudioService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IOSMicrophoneAudioService.swift; sourceTree = "<group>"; };
 		5ABE2174FB91486F25A41718 /* IOSAppModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IOSAppModel.swift; sourceTree = "<group>"; };
@@ -56,6 +58,7 @@
 				295D8BA3F970C4F652D91815 /* BasselefantiOSApp.swift */,
 				5ABE2174FB91486F25A41718 /* IOSAppModel.swift */,
 				C36130A94C31C22E8F91A38D /* IOSContentView.swift */,
+				43412D3497458F8D22B275D3 /* IOSFullscreenHost.swift */,
 				5A196DF0387ABF47EED56363 /* IOSMicrophoneAudioService.swift */,
 				5932BA31DA0C6D759829BB1B /* SharedVisualTypes.swift */,
 			);
@@ -169,6 +172,7 @@
 				D938375EB84A7BF78634BE1A /* BasselefantiOSApp.swift in Sources */,
 				07CC27407B4F1DDC5B26E2FE /* IOSAppModel.swift in Sources */,
 				AB547A6B700E52EE6F561B66 /* IOSContentView.swift in Sources */,
+				4AF6BB1E4DD52EBFB8056B2B /* IOSFullscreenHost.swift in Sources */,
 				D7D638C6237A18BF235003AD /* IOSMicrophoneAudioService.swift in Sources */,
 				CD885F1CFE48DE5EB0DCA190 /* SharedVisualTypes.swift in Sources */,
 				1F6BE537BC5C4CEF0F979D5D /* VisualStyle.swift in Sources */,

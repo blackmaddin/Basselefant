@@ -30,7 +30,7 @@ struct IOSContentView: View {
         }
         .background(.black)
         .ignoresSafeArea(.container, edges: .all)
-        .statusBar(hidden: true)
+        .persistentSystemOverlays(.hidden)
         .onAppear { model.start() }
         .onDisappear { model.stop() }
     }
