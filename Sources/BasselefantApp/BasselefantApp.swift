@@ -100,6 +100,13 @@ struct BasselefantApp: App {
                     .disabled(true)
                 Button("Detected: \(model.track.source.rawValue)") {}
                     .disabled(true)
+                if model.directDiagnosticText.isEmpty == false {
+                    Button("Direct Diagnostic: \(model.directDiagnosticText)") {}
+                        .disabled(true)
+                }
+                Divider()
+                Button("Request Spotify/Music Access") { model.requestDirectAccessPrompt() }
+                Button("Open Automation Settings") { model.openAutomationSettings() }
             }
             CommandMenu("Displays") {
                 Button("Refresh Displays") { model.refreshDisplays() }
@@ -250,6 +257,16 @@ private struct MenuBarControls: View {
                 .foregroundStyle(.secondary)
             Text("Quelle: \(model.track.source.rawValue)")
                 .foregroundStyle(.secondary)
+            if model.directDiagnosticText.isEmpty == false {
+                Text(model.directDiagnosticText)
+                    .foregroundStyle(.secondary)
+            }
+            Button("Request Spotify/Music Access") {
+                model.requestDirectAccessPrompt()
+            }
+            Button("Open Automation Settings") {
+                model.openAutomationSettings()
+            }
         }
 
         Section("Displays / AirPlay") {

@@ -107,6 +107,12 @@ Das Skript klont bei Bedarf automatisch nach `~/.basselefant/repo`, zieht Update
 - Beim ersten Start Mikrofon-Zugriff erlauben.
 - Fuer direkten Spotify/Music-Abruf kann macOS nach Automationszugriff fragen.
 
+### Wenn Direkt-Erkennung nicht funktioniert
+
+1. In Basselefant-Menue `Audio` -> `Request Spotify/Music Access` klicken.
+2. Danach `Audio` -> `Open Automation Settings` und unter `Automation` fuer `Basselefant` Zugriff auf Spotify/Music aktivieren.
+3. Spotify/Music einmal neu starten.
+
 ## Struktur
 
 - `Sources/BasselefantApp/Audio`: Mikrofon-Capture + DSP/FFT-Analyse

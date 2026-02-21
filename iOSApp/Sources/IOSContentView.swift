@@ -5,9 +5,9 @@ struct IOSContentView: View {
     @State private var controlsVisible = true
 
     var body: some View {
-        GeometryReader { proxy in
-            let landscape = proxy.size.width > proxy.size.height
-            ZStack {
+        ZStack {
+            GeometryReader { proxy in
+                let landscape = proxy.size.width > proxy.size.height
                 BasselefantVisualizer(
                     feature: model.feature,
                     style: model.visualStyle,
@@ -26,7 +26,11 @@ struct IOSContentView: View {
                 }
                 .padding(12)
             }
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
         }
+        .background(.black)
+        .ignoresSafeArea(.container, edges: .all)
+        .statusBar(hidden: true)
         .onAppear { model.start() }
         .onDisappear { model.stop() }
     }

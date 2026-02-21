@@ -173,6 +173,7 @@ final class AppModel: ObservableObject {
     @Published var feature: AudioFeature = .zero
     @Published var track: TrackInfo = .empty
     @Published var statusText: String = "Initialisiere Audio..."
+    @Published var directDiagnosticText: String = ""
     @Published var sourceMode: RecognitionSourceMode = .hybrid
     @Published var visualStyle: VisualStyle = .denseMonolith
     @Published var dynamicsPreset: VisualDynamicsPreset = .cinematic
@@ -233,10 +234,26 @@ final class AppModel: ObservableObject {
                 } else {
                     if self.sourceMode == .directOnly {
                         self.track = self.waitingDirectTrack()
-                        self.statusText = "Kein direkter Player gefunden (Spotify/Music inaktiv)"
+                        if self.directDiagnosticText.isEmpty {
+                            self.statusText = "Kein direkter Player gefunden (Spotify/Music inaktiv)"
+                        } else {
+                            self.statusText = self.directDiagnosticText
+                        }
                     } else {
                         self.statusText = "Kein direkter Player gefunden, Mikrofon-Fallback aktiv"
                     }
+                }
+            }
+        }
+        directService.onDiagnosticUpdate = { [weak self] diagnostic in
+            Task { @MainActor in
+                guard let self else { return }
+                self.directDiagnosticText = diagnostic ?? ""
+                if self.sourceMode == .directOnly,
+                   self.isDirectSource(self.track.source) == false,
+                   let diagnostic,
+                   !diagnostic.isEmpty {
+                    self.statusText = diagnostic
                 }
             }
         }
@@ -287,7 +304,9 @@ final class AppModel: ObservableObject {
             if isDirectSource(track.source) == false {
                 track = waitingDirectTrack()
             }
-            statusText = "Direktmodus aktiv (Spotify/Music, Mikrofon aus)"
+            statusText = directDiagnosticText.isEmpty
+                ? "Direktmodus aktiv (Spotify/Music, Mikrofon aus)"
+                : directDiagnosticText
         case .microphoneOnly:
             startMicrophone()
             lastDirectTrackDate = nil
@@ -301,6 +320,24 @@ final class AppModel: ObservableObject {
                 statusText = "Loopback-Modus aktiv (\(activeInputName()))"
             } else {
                 statusText = "Kein Loopback-Device gefunden (z. B. BlackHole/Loopback/Soundflower)"
+            }
+        }
+    }
+
+    func requestDirectAccessPrompt() {
+        directService.requestAuthorizationPrompt()
+        statusText = "Direktzugriff wird angefragt. Falls gefragt: Automation fuer Spotify/Music erlauben."
+    }
+
+    func openAutomationSettings() {
+        let urls = [
+            "x-apple.systempreferences:com.apple.preference.security?Privacy_Automation",
+            "x-apple.systempreferences:com.apple.preference.security?Privacy",
+            "x-apple.systempreferences:com.apple.preference.security"
+        ]
+        for raw in urls {
+            if let url = URL(string: raw), NSWorkspace.shared.open(url) {
+                return
             }
         }
     }

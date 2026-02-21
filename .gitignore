@@ -2,3 +2,5 @@
 .build/
 .swiftpm/
 dist/
+*.xcuserstate
+xcuserdata/
