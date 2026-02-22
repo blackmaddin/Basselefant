@@ -6,8 +6,6 @@ PROJECT_PATH="$ROOT_DIR/iOSApp/BasselefantiOS.xcodeproj"
 DERIVED_PATH="$ROOT_DIR/.build/ios-derived"
 HOME_PATH="$ROOT_DIR/.build/ios-home"
 
-"$ROOT_DIR/scripts/generate_ios_project.sh"
-
 if [ -d /Applications/Xcode.app/Contents/Developer ]; then
   export DEVELOPER_DIR=/Applications/Xcode.app/Contents/Developer
 fi

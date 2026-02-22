@@ -8,6 +8,7 @@ Abstrakte, audio-reaktive macOS-SwiftUI-App fuer Elektro/Techno/House-orientiert
   - Direkter Abruf von aktuell laufenden Tracks aus `Spotify` und `Music.app` (AppleScript).
   - Mikrofon-Fallback (internes oder externes Mikrofon) mit Echtzeit-Audioanalyse.
   - `Nur Direkt` deaktiviert das Mikrofon komplett (kein laufender Audio-Tap).
+  - Standardstart ist `Nur Direkt`; Mikro wird erst ueber das Menue (`Audio`) aktiviert.
 - Audio-Metriken in Echtzeit:
   - Energie, Bass/Mid/Treble, Spektralzentrum, Puls und Tempo-Schaetzung.
 - Kunstorientierte Visualisierung:
@@ -30,14 +31,9 @@ Die iOS-App liegt in `iOSApp/BasselefantiOS.xcodeproj`.
 
 Wichtig:
 - iOS nutzt Mikrofon-Reaktivitaet.
+- Das Mikrofon ist standardmaessig aus und wird nur ueber das iOS-Menue (Mic-Icon) aktiviert.
 - Direkter Spotify/Music-Track-Abruf wie auf macOS ist auf iOS systembedingt nicht verfuegbar.
-- Orientierungen sind aktiviert: Portrait + Landscape.
-
-Projekt neu generieren (falls noetig):
-
-```bash
-./scripts/generate_ios_project.sh
-```
+- Orientierungen sind aktiviert: Portrait + Landscape (echtes Fullscreen auf iPhone).
 
 Device-Build (unsigned, fuer technischen Check):
 

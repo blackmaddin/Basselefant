@@ -31,7 +31,7 @@ struct IOSContentView: View {
         .background(.black)
         .ignoresSafeArea(.container, edges: .all)
         .persistentSystemOverlays(.hidden)
-        .onAppear { model.start() }
+        .onAppear { model.applyMicrophoneMenuStateOnAppear() }
         .onDisappear { model.stop() }
     }
 
@@ -53,6 +53,32 @@ struct IOSContentView: View {
             } label: {
                 Image(systemName: controlsVisible ? "slider.horizontal.3" : "slider.horizontal.below.rectangle")
                     .font(.system(size: 15, weight: .bold))
+                    .foregroundStyle(.white)
+                    .padding(10)
+                    .background(.black.opacity(0.35), in: Circle())
+            }
+
+            Menu {
+                Button(model.microphoneMenuEnabled ? "Mikrofon: An" : "Mikrofon: Aus") {
+                    model.setMicrophoneEnabledFromMenu(!model.microphoneMenuEnabled)
+                }
+                Divider()
+                Button("Style: \(model.visualStyle.title)") { }
+                    .disabled(true)
+                ForEach(VisualStyle.allCases) { style in
+                    Button {
+                        model.visualStyle = style
+                    } label: {
+                        if model.visualStyle == style {
+                            Label(style.title, systemImage: "checkmark")
+                        } else {
+                            Text(style.title)
+                        }
+                    }
+                }
+            } label: {
+                Image(systemName: model.microphoneMenuEnabled ? "mic.fill" : "mic.slash.fill")
+                    .font(.system(size: 14, weight: .bold))
                     .foregroundStyle(.white)
                     .padding(10)
                     .background(.black.opacity(0.35), in: Circle())

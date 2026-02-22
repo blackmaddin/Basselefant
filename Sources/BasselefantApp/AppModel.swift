@@ -174,7 +174,7 @@ final class AppModel: ObservableObject {
     @Published var track: TrackInfo = .empty
     @Published var statusText: String = "Initialisiere Audio..."
     @Published var directDiagnosticText: String = ""
-    @Published var sourceMode: RecognitionSourceMode = .hybrid
+    @Published var sourceMode: RecognitionSourceMode = .directOnly
     @Published var visualStyle: VisualStyle = .denseMonolith
     @Published var dynamicsPreset: VisualDynamicsPreset = .cinematic
     @Published var audioMapProfile: VisualAudioMapProfile = .balanced

@@ -2,13 +2,18 @@ import Foundation
 
 @MainActor
 final class IOSAppModel: ObservableObject {
+    private enum StorageKey {
+        static let microphoneEnabled = "basselefant.ios.microphoneEnabled"
+    }
+
     @Published var feature: AudioFeature = .zero
-    @Published var statusText: String = "Initialisiere Mikrofon..."
+    @Published var statusText: String = "Mikrofon aus (im Menü aktivieren)"
     @Published var visualStyle: VisualStyle = .denseMonolith
     @Published var dynamicsPreset: VisualDynamicsPreset = .cinematic
     @Published var audioMapProfile: VisualAudioMapProfile = .balanced
     @Published var dynamicsTuning: VisualDynamicsTuning = .neutral
     @Published var autoGainEnabled: Bool = true
+    @Published var microphoneMenuEnabled: Bool = false
 
     private let microphone = IOSMicrophoneAudioService()
     private var previousFeature: AudioFeature = .zero
@@ -16,6 +21,7 @@ final class IOSAppModel: ObservableObject {
     private var gain: Double = 1.0
 
     init() {
+        microphoneMenuEnabled = UserDefaults.standard.bool(forKey: StorageKey.microphoneEnabled)
         microphone.onFeature = { [weak self] incoming in
             Task { @MainActor in
                 guard let self else { return }
@@ -27,7 +33,25 @@ final class IOSAppModel: ObservableObject {
         }
     }
 
-    func start() {
+    func applyMicrophoneMenuStateOnAppear() {
+        if microphoneMenuEnabled {
+            start()
+        } else {
+            stop(resetStatus: true)
+        }
+    }
+
+    func setMicrophoneEnabledFromMenu(_ enabled: Bool) {
+        microphoneMenuEnabled = enabled
+        UserDefaults.standard.set(enabled, forKey: StorageKey.microphoneEnabled)
+        if enabled {
+            start()
+        } else {
+            stop(resetStatus: true)
+        }
+    }
+
+    private func start() {
         guard !running else { return }
         running = true
         statusText = "Mikrofon wird gestartet..."
@@ -42,10 +66,15 @@ final class IOSAppModel: ObservableObject {
         }
     }
 
-    func stop() {
+    func stop(resetStatus: Bool = false) {
         guard running else { return }
         microphone.stop()
         running = false
+        previousFeature = .zero
+        feature = .zero
+        if resetStatus {
+            statusText = "Mikrofon aus (im Menü aktivieren)"
+        }
     }
 
     private func blendFeature(previous: AudioFeature, incoming: AudioFeature) -> AudioFeature {
