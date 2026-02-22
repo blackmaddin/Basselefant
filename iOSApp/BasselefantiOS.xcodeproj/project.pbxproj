@@ -199,9 +199,10 @@
 				);
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.blackmaddin.basselefant.ios;
+				"PRODUCT_BUNDLE_IDENTIFIER[sdk=macosx*]" = com.blackmaddin.basselefant.ios.maccatalyst;
 				SDKROOT = iphoneos;
-				SUPPORTS_MACCATALYST = NO;
-				TARGETED_DEVICE_FAMILY = 1;
+				SUPPORTS_MACCATALYST = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};
@@ -277,9 +278,10 @@
 				);
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.blackmaddin.basselefant.ios;
+				"PRODUCT_BUNDLE_IDENTIFIER[sdk=macosx*]" = com.blackmaddin.basselefant.ios.maccatalyst;
 				SDKROOT = iphoneos;
-				SUPPORTS_MACCATALYST = NO;
-				TARGETED_DEVICE_FAMILY = 1;
+				SUPPORTS_MACCATALYST = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};

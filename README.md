@@ -25,7 +25,7 @@ swift build
 swift run BasselefantApp
 ```
 
-## iOS Variante (iPhone, Hochkant + Quer)
+## iOS/iPadOS Variante (iPhone + iPad, Hochkant + Quer)
 
 Die iOS-App liegt in `iOSApp/BasselefantiOS.xcodeproj`.
 
@@ -33,7 +33,9 @@ Wichtig:
 - iOS nutzt Mikrofon-Reaktivitaet.
 - Das Mikrofon ist standardmaessig aus und wird nur ueber das iOS-Menue (Mic-Icon) aktiviert.
 - Direkter Spotify/Music-Track-Abruf wie auf macOS ist auf iOS systembedingt nicht verfuegbar.
-- Orientierungen sind aktiviert: Portrait + Landscape (echtes Fullscreen auf iPhone).
+- Targeted Device Family ist `iPhone + iPad` (kein iPhone-Kompatibilitaetsfenster auf iPad).
+- Orientierungen sind aktiviert: Portrait + Landscape.
+- `UIRequiresFullScreen = true` und versteckte Systemoverlays fuer moeglichst randloses Vollbild.
 
 Device-Build (unsigned, fuer technischen Check):
 
